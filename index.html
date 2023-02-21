@@ -33,6 +33,16 @@
     <input type="range" min="3" max="10" value="5" id="radius" />
     <container> 
     <script>
+          if ('userAgentData' in navigator) {
+  const platform = navigator.userAgentData.platform;
+  const brands = navigator.userAgentData.brands;
+  console.log('Platform:', platform);
+  console.log('Brands:', brands);
+} else {
+  const userAgent = navigator.userAgent;
+  console.log('User Agent:', userAgent);
+}
+
       const canvas = document.getElementById('canvas');
       const context = canvas.getContext('2d');
       const image = new Image();
