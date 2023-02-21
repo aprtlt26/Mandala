@@ -1,110 +1,98 @@
 <!DOCTYPE html>
 <html lang="en"> 
-      <head>
+  <head>
     <title>Mandala Paint</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="styles.css">
-
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   </head>
-  <container> 
   <body>
     <div class="page-container">
-
-    <header>
-      <h1>Mandala Paint & Sound  Meditation </h1>
-    </header>
-
-
-    <div class="center">
-  <p> <em> Mandalas have been recognized in psychology as a therapeutic element. 
-    Swiss psychologist Carl Jung proposed that they are representations 
-    of our minds that facilitate concentration, transformation, and the 
-    assimilation of unconscious aspects. </em>  </p>
-</div>
-
-    <div class="image-container">
-
-      <div class="color-picker-container">
-        <div class="color-picker-container">
-
-
-    <canvas id="canvas" width="500" height="500"></canvas>
-    <input type="color" id="color-picker" />
-    <input type="range" min="3" max="10" value="5" id="radius" />
-    <container> 
+      <header>
+        <h1>Mandala Paint & Sound Meditation</h1>
+      </header>
+      <div class="container d-flex justify-content-center align-items-center">
+        <div class="row">
+          <div class="col-12">
+            <div class="center">
+              <p><em>Mandalas have been recognized in psychology as a therapeutic element. Swiss psychologist Carl Jung proposed that they are representations of our minds that facilitate concentration, transformation, and the assimilation of unconscious aspects.</em></p>
+            </div>
+            <div class="image-container">
+              <canvas id="canvas" width="500" height="500"></canvas>
+              <input type="color" id="color-picker" />
+              <input type="range" min="3" max="10" value="5" id="radius" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <script>
-
-if ('userAgentData' in navigator) {
-  const platform = navigator.userAgentData.platform;
-  const brands = navigator.userAgentData.brands;
-  console.log('Platform:', platform);
-  console.log('Brands:', brands);
-} else {
-  const userAgent = navigator.userAgent;
-  console.log('User Agent:', userAgent);
-}
-
-
+      if ('userAgentData' in navigator) {
+        const platform = navigator.userAgentData.platform;
+        const brands = navigator.userAgentData.brands;
+        console.log('Platform:', platform);
+        console.log('Brands:', brands);
+      } else {
+        const userAgent = navigator.userAgent;
+        console.log('User Agent:', userAgent);
+      }
 
       const canvas = document.getElementById('canvas');
       const context = canvas.getContext('2d');
       const image = new Image();
-      image. src = 'mandalaprosperidad.jpeg'; // Coloca la ruta correcta hacia la imagen
-
+      image.src = 'mandalaprosperidad.jpeg'; // Coloca la ruta correcta hacia la imagen
       image.onload = function() {
         context.drawImage(image, 0, 0, canvas.width, canvas.height);
       };
 
-
       const colorPicker = document.getElementById('color-picker');
       let painting = false;
-
-      function startPainting() {
+      function startPainting(event) {
         painting = true;
+        paint(event);
       }
-
       function stopPainting() {
         painting = false;
       }
-
-function paint(event) {
+      function paint(event) {
   if (!painting) return;
   context.beginPath();
   context.fillStyle = colorPicker.value;
   const radius = document.getElementById('radius').value;
-  // Ajustar la posición de la pintura para tomar en cuenta el desplazamiento del canvas
+
+  // Obtener las coordenadas del canvas
   const rect = canvas.getBoundingClientRect();
-  const x = event.touches[0].clientX - rect.left;
-  const y = event.touches[0].clientY - rect.top;
-  context.arc(x, y, radius, 0, 2 * Math.PI);
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
+
+  if (event.touches) {
+    // Ajustar la posición del puntero con las coordenadas del canvas
+    context.arc((event.touches[0].clientX - rect.left) * scaleX, (event.touches[0].clientY - rect.top) * scaleY, radius, 0, 2 * Math.PI);
+  } else {
+    context.arc(event.offsetX, event.offsetY, radius, 0, 2 * Math.PI);
+  }
+
   context.fill();
 }
 
+     
 
 
       canvas.addEventListener('mousedown', startPainting);
       canvas.addEventListener('mouseup', stopPainting);
       canvas.addEventListener('mousemove', paint);
-
-
-      canvas.addEventListener('touchstart', function(event) {
+      canvas.addEventListener('touchstart', startPainting, {passive: false});
+      canvas.addEventListener('touchend', stopPainting, {passive: false});
+      canvas.addEventListener('touchmove', paint, {passive: false});
+      canvas.addEventListener('touchmove', function(event) {
   event.preventDefault();
-  startPainting();
-}, {passive: true});
-
-canvas.addEventListener('touchend', function(event) {
-  event.preventDefault();
-  stopPainting();
-}, {passive: true});
-
-canvas.addEventListener('touchmove', function(event) {
-  event.preventDefault();
-  paint(event);
-}, {passive: true});
-
+  const rect = canvas.getBoundingClientRect();
+  const x = event.touches[0].clientX - rect.left;
+  const y = event.touches[0].clientY - rect.top;
+  paint(x, y);
+}, {passive: false});
 
 
     </script>
-    </container>
   </body>
 </html>
