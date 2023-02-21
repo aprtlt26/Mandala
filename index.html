@@ -72,7 +72,11 @@ function paint(event) {
   context.beginPath();
   context.fillStyle = colorPicker.value;
   const radius = document.getElementById('radius').value;
-  context.arc(event.touches[0].clientX, event.touches[0].clientY, radius, 0, 2 * Math.PI);
+  // Ajustar la posición de la pintura para tomar en cuenta el desplazamiento del canvas
+  const rect = canvas.getBoundingClientRect();
+  const x = event.touches[0].clientX - rect.left;
+  const y = event.touches[0].clientY - rect.top;
+  context.arc(x, y, radius, 0, 2 * Math.PI);
   context.fill();
 }
 
