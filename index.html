@@ -72,9 +72,7 @@ function paint(event) {
   context.beginPath();
   context.fillStyle = colorPicker.value;
   const radius = document.getElementById('radius').value;
-  const x = event.offsetX || event.touches[0].clientX - canvas.offsetLeft;
-  const y = event.offsetY || event.touches[0].clientY - canvas.offsetTop;
-  context.arc(x, y, radius, 0, 2 * Math.PI);
+  context.arc(event.touches[0].clientX, event.touches[0].clientY, radius, 0, 2 * Math.PI);
   context.fill();
 }
 
