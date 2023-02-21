@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html> 
+  <head>
+    <title>mandala meditación</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
+  </head>
+  <container> 
+  <body>
+    <header>
+      <h1>Mandala Paint & Sound  Meditation </h1>
+    </header>
+
+    <div class="container">
+      <div class="color-picker-container">
+        <div class="color-picker-container">
+
+    <canvas id="canvas" width="500" height="500"></canvas>
+    <input type="color" id="color-picker" />
+    <input type="range" min="3" max="10" value="5" id="radius" />
+    <container> 
+    <script>
+      const canvas = document.getElementById('canvas');
+      const context = canvas.getContext('2d');
+      const image = new Image();
+      image. src = 'mandalaprosperidad.jpeg'; // Coloca la ruta correcta hacia la imagen
+
+      image.onload = function() {
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+      };
+
+
+      const colorPicker = document.getElementById('color-picker');
+      let painting = false;
+
+      function startPainting() {
+        painting = true;
+      }
+
+      function stopPainting() {
+        painting = false;
+      }
+
+      function paint(event) {
+        if (!painting) return;
+        context.beginPath();
+        context.fillStyle = colorPicker.value;
+        const radius = document.getElementById('radius').value;
+        context.arc(event.offsetX, event.offsetY, radius, 0, 2 * Math.PI);
+        context.fill();
+      }
+
+      canvas.addEventListener('mousedown', startPainting);
+      canvas.addEventListener('mouseup', stopPainting);
+      canvas.addEventListener('mousemove', paint);
+    </script>
+    </container>
+  </body>
+</html>
