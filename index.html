@@ -67,13 +67,13 @@ if ('userAgentData' in navigator) {
         painting = false;
       }
 
-      function paint(event) {
+function paint(event) {
   if (!painting) return;
   context.beginPath();
   context.fillStyle = colorPicker.value;
   const radius = document.getElementById('radius').value;
-  const x = event.touches ? event.touches[0].clientX - canvas.offsetLeft : event.offsetX;
-  const y = event.touches ? event.touches[0].clientY - canvas.offsetTop : event.offsetY;
+  const x = event.offsetX || event.touches[0].clientX - canvas.offsetLeft;
+  const y = event.offsetY || event.touches[0].clientY - canvas.offsetTop;
   context.arc(x, y, radius, 0, 2 * Math.PI);
   context.fill();
 }
