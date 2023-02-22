@@ -15,28 +15,25 @@
         <div class="row">
           <div class="col-12">
             <div class="center">
-              <p><em>Mandalas have been recognized in psychology as a therapeutic element. Swiss psychologist Carl Jung proposed that they are representations of our minds that facilitate concentration, transformation, and the assimilation of unconscious aspects. </em></p>
-             <p><em> Then you can select different colors in the selector and paint the mandala with your finger or the mouse, while listening to the background sound. You should know that you cannot go back or control, but you can correct creatively.
-               Take the time to connect with your interior. </em></p>
+              <p><em>Mandalas have been recognized in psychology as a therapeutic element. Swiss psychologist Carl Jung proposed that they are representations of our minds that facilitate concentration, transformation, and the assimilation of unconscious aspects.</em></p>
+              <p><em> Then you can select different colors in the selector and color the mandala with your finger with the mouse, while listening to the background sound. Take the time to connect with your interior. </em></p>
+
             </div>
             <div class="image-container">
               <canvas id="canvas" width="500" height="500"></canvas>
               <input type="color" id="color-picker" />
               <input type="range" min="3" max="10" value="5" id="radius" />
             </div>
+        </div>
+    
+        <audio id="audio" src="gaita.mp3"></audio>
+             
+              </div>
+            </div>
+            </div>
           </div>
-           <audio id="audio-player" controls>
-                <source src="gaita.mp3" type="audio/mpeg">
-              </audio>
         </div>
       </div>
-        </div>
-      </div>
-              <A HREF="https://aprtlt26.github.io/portafolio-web/" target=”_blank” > 
-                 <em>Alfonso Pretelt</em> </A>
-    </div>
-      </div>
-
     </div>
     <script>
       if ('userAgentData' in navigator) {
@@ -58,14 +55,18 @@
       };
 
       const colorPicker = document.getElementById('color-picker');
+      const audio = document.getElementById('audio');
       let painting = false;
-      function startPainting(event) {
+
+      function startPainting() {
         painting = true;
-        paint(event);
+        audio.play();
       }
+
       function stopPainting() {
         painting = false;
       }
+  
       function paint(event) {
   if (!painting) return;
   context.beginPath();
@@ -103,6 +104,7 @@
   const y = event.touches[0].clientY - rect.top;
   paint(x, y);
 }, {passive: false});
+
 
 
     </script>
