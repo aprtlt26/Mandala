@@ -1,11 +1,9 @@
 .page-container {
-  text-align: center;
-align-items: center;
+   text-align: center;
+   align-items: center;
    max-width: 100px;
    padding: 0 10px;
    text-align: center;
-
-
   margin: 0 auto;
 }
 
@@ -49,6 +47,7 @@ header img {
   width: 50%;
   height: auto;
   background-size: cover;
+  padding: 50px;
 
 }
 p{
@@ -60,7 +59,7 @@ p{
   text-align: center;
   font-size: smaller;
   width: 50%;
-padding-top: 120px;}
+}
 
 p:first-child {
   margin-bottom: 50px;
@@ -70,6 +69,8 @@ p:first-child {
   justify-content: center;
   align-items: center;
   padding: 140px;
+  padding: 50px;
+
   
 
 }
@@ -132,3 +133,5 @@ A{
   display: block; 
   margin-top: 10px;
 }
+
+
