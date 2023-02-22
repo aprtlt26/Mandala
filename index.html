@@ -24,10 +24,17 @@
             
             </div>
             <div class="image-container">
-              <canvas id="canvas" width="500" height="500"></canvas>
-              <input type="color" id="color-picker" />
-              <input type="range" min="3" max="10" value="5" id="radius" />
+              <div class="image-container">
+                <canvas id="canvas" width="500" height="500"></canvas>
+                <input type="color" id="color-picker" />
+                <input type="range" min="3" max="10" value="5" id="radius" />
+              
+               
+              </div>
+              
+              
             </div>
+
         </div>
     
         <audio id="audio" src="gaita.mp3"></audio>
@@ -43,8 +50,7 @@
               
               </div>
             </div>
-          </div>
-        </div>
+
         <div>
                   </div>
             <div class="container d-flex justify-content-center align-items-center">
@@ -56,7 +62,9 @@
     </div>
     <div class="controls-container">
     </div>
+
     <script>
+
       if ('userAgentData' in navigator) {
         const platform = navigator.userAgentData.platform;
         const brands = navigator.userAgentData.brands;
@@ -70,7 +78,7 @@
       const canvas = document.getElementById('canvas');
       const context = canvas.getContext('2d');
       const image = new Image();
-      image.src = 'mandalaprosperidad.jpeg'; // Coloca la ruta correcta hacia la imagen
+      image.src = 'mandala1.jpeg'; // Coloca la ruta correcta hacia la imagen
       image.onload = function() {
         context.drawImage(image, 0, 0, canvas.width, canvas.height);
       };
@@ -94,6 +102,7 @@
   context.fillStyle = colorPicker.value;
   const radius = document.getElementById('radius').value;
 
+
   // Obtener las coordenadas del canvas
   const rect = canvas.getBoundingClientRect();
   const scaleX = canvas.width / rect.width;
@@ -109,7 +118,6 @@
   context.fill();
 }
 
-     
 
 
       canvas.addEventListener('mousedown', startPainting);
