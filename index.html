@@ -19,25 +19,26 @@
 
             <div class="container d-flex justify-content-center align-items-center">
 
-            <p><em> Then you can select different colors in the selector and color the mandala with your finger with the mouse, while listening to the background sound. You should know that you cannot go back or control, but you can correct creatively. 
+            <p><em> Then you can select different colors in the selector and paint the mandala with your finger or the mouse,
+              this will play a background sound. You should know that you cannot go back or control, but you can correct creatively. 
+              Please refresh the page to get a new image and new audio.
               Take the time to connect with your interior.  </em></p>
             
             </div>
             <div class="image-container">
-              <div class="image-container">
-                <canvas id="canvas" width="500" height="500"></canvas>
-                <input type="color" id="color-picker" />
-                <input type="range" min="3" max="10" value="5" id="radius" />
-              
-               
-              </div>
-              
+              <canvas id="canvas" width="500" height="500"></canvas>
+              <input type="color" id="color-picker" />
+              <input type="range" min="3" max="10" value="5" id="radius" />
+            </div>
+            
+           
+            
               
             </div>
 
         </div>
     
-        <audio id="audio" src="gaita.mp3"></audio>
+        <audio id="audio" src="audio1.mp3"></audio>
              
               </div>
             </div>
@@ -65,6 +66,9 @@
 
     <script>
 
+      
+
+
       if ('userAgentData' in navigator) {
         const platform = navigator.userAgentData.platform;
         const brands = navigator.userAgentData.brands;
@@ -75,17 +79,33 @@
         console.log('User Agent:', userAgent);
       }
 
-      const canvas = document.getElementById('canvas');
-      const context = canvas.getContext('2d');
-      const image = new Image();
-      image.src = 'mandala1.jpeg'; // Coloca la ruta correcta hacia la imagen
-      image.onload = function() {
-        context.drawImage(image, 0, 0, canvas.width, canvas.height);
-      };
+      const images = ['mandala1.jpeg', 'mandala2.jpeg', 'mandala3.jpeg', 'mandala4.jpeg', 'mandala5.jpeg'];
+const audios = ['audio1.mp3', 'audio2.mp3', 'audio3.mp3', 'audio4.mp3', 'audio5.mp3'];
+
+const randomIndex = Math.floor(Math.random() * images.length);
+const randomImage = images[randomIndex];
+const randomAudio = audios[randomIndex];
+
+const canvas = document.getElementById('canvas');
+const context = canvas.getContext('2d');
+const image = new Image();
+image.src = randomImage;
+// Coloca la ruta correcta hacia la imagen
+image.onload = function() {
+  context.drawImage(image, 0, 0, canvas.width, canvas.height);
+};
+
+const audio = document.getElementById('audio');
+audio.src = randomAudio;
+
+
+     
 
       const colorPicker = document.getElementById('color-picker');
-      const audio = document.getElementById('audio');
       let painting = false;
+
+
+
 
       function startPainting() {
         painting = true;
@@ -133,6 +153,19 @@
   const y = event.touches[0].clientY - rect.top;
   paint(x, y);
 }, {passive: false});
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
