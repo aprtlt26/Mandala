@@ -1,12 +1,31 @@
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #canvas, #canvas * {
+    visibility: visible;
+  }
+  #canvas {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    width: 1200px;
+    height: 1200px;
+  }
+}
+
+
+
 .page-container {
    text-align: center;
    align-items: center;
    max-width: 100px;
    padding: 0 10px;
    text-align: center;
-  margin: 0 auto;
-}
-
+  margin: 0 auto;}
 
 
 @media screen and (max-width: 600px) {
@@ -64,6 +83,8 @@ p{
 p:first-child {
   margin-bottom: 50px;
 }
+
+
 .image-container {
   display: inline-block;
   justify-content: center;
@@ -81,6 +102,16 @@ img {
   max-height: 100%;
   object-fit: contain;
 
+
+}
+
+
+
+
+select{
+  height: 20px;
+  width: 70px;
+  font-size: smaller;
 
 }
 
@@ -126,12 +157,13 @@ button{
 
 
 A{
+  display: flex;
   text-align: center;
   color: rgb(0, 0, 0);
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: smaller;
   display: block; 
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 
