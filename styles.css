@@ -17,7 +17,10 @@
   }
 }
 
-
+button{
+  width: 50px;
+    height: 23px;
+}
 
 .page-container {
    text-align: center;
@@ -149,11 +152,9 @@ input[type="range"] {
   border: none;
 }
 
-button{
-  height: 30px;
-  width: 30px;
+
   
-}
+
 
 
 A{
