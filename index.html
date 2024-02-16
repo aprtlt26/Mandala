@@ -1,173 +1,176 @@
 <!DOCTYPE html>
 <html lang="en"> 
-  <head>
+<head>
     <title>Mandala Paint</title>
-    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  </head>
+    <style>
+        #canvas-container {
+            position: absolute;
+            bottom: -2100px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        <head>
+    <style>
+        #color-picker {
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        button {
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            background-color: #6b7d6d;
+            color: #35fd50;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #66fff0;
+        }
+    </style>
+</head>
+
+    </style>
+</head>
   
-  <body>
-      <header class="no-print">
-        
-<img src = "titlemandal.png" >
-      </header>
-      <div class="page-container">
+<body>
+    <header class="no-print">
+        <img src="titlemandal.png">
+    </header>
 
-      <div class="container d-flex justify-content-center align-items-center">
-        <div class="row">
+    <div class="page-container">
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="row">
+                <div class="container d-flex justify-content-center align-items-center no-print">
+                    <p><em>Then you can select different colors in the selector and paint the mandala with your finger or the mouse, this will play a background sound. You should know that you cannot go back or control, but you can correct creatively. Please refresh the page to get a new image and new audio. Take the time to connect with your interior.</em></p>
+                </div>
 
-            <div class="container d-flex justify-content-center align-items-center">
-              <div class="no-print">
-
-            <p><em> Then you can select different colors in the selector and paint the mandala with your finger or the mouse,
-              this will play a background sound. You should know that you cannot go back or control, but you can correct creatively. 
-              Please refresh the page to get a new image and new audio.
-              Take the time to connect with your interior.  </em></p>
-            
+                <!-- Galería de imágenes -->
+                <div class="gallery-container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="gallery-image" src="mandala1.jpeg" alt="Mandala 1">
+                                <img class="gallery-image" src="mandala2.jpeg" alt="Mandala 2">
+                                <img class="gallery-image" src="mandala3.jpeg" alt="Mandala 3">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="gallery-image" src="mandala4.jpeg" alt="Mandala 4">
+                                <img class="gallery-image" src="mandala5.jpeg" alt="Mandala 5">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="image-container">
-              <canvas id="canvas" width="500" height="500"></canvas>
-
-              <div class="no-print">
-
-              <input type="color" id="color-picker" />
-              <input type="range" min="3" max="10" value="5" id="radius" />
-               <button onclick="printMandala()">Print</button>
-
-            </div>
-            
-           
-            
-              
-            </div>
-
         </div>
-    
-        <audio id="audio" src="audio1.mp3"></audio>
-             
-              </div>
-            </div>
-            </div>
-            <div class="col-12">
-              <div class="container d-flex justify-content-center align-items-center">
 
-              <p><em>Mandalas have been recognized in psychology as a therapeutic element. 
-                They are representations of our minds that facilitate concentration, transformation, and the assimilation of unconscious aspects.</em></p>
-              
-              </div>
-            </div>
-
-        <div>
-                  </div>
-            <div class="container d-flex justify-content-center align-items-center">
-
-            <p>® 2021 Ideofónica / Develop & Music by  <A HREF="https://alfonsopretelt.com/" target=”_blank” > <em>Alfonso Pretelt</em> </A> </p>
-          </div>
+        <div class="container d-flex justify-content-center align-items-center">
+            <p><em>Mandalas have been recognized in psychology as a therapeutic element. They are representations of our minds that facilitate concentration, transformation, and the assimilation of unconscious aspects.</em></p>
         </div>
-      </div>
+
+        <div class="container d-flex justify-content-center align-items-center">
+            <p>® 2021 Ideofónica / Develop & Music by <a href="https://aprtlt26.github.io/portafolio-web/" target="_blank"><em>Alfonso Pretelt</em></a></p>
+        </div>
     </div>
-    <div class="controls-container">
+
+    <!-- Lienzo -->
+    <div id="canvas-container">
+        <canvas id="canvas" width="700" height="700"></canvas>
+
+        <!-- Selector de color -->
+        <div class="no-print">
+            <input type="color" id="color-picker" />
+            <input type="range" min="3" max="10" value="5" id="radius"  />
+            <button onclick="printMandala()">Print</button>
+        </div>
     </div>
+
+    <audio id="audio" src="audio1.mp3"></audio>
 
     <script>
+        function printMandala() {
+            window.print();
+        }
 
-function printMandala() {
-  window.print();
-}
+        const images = ['mandala1.jpeg', 'mandala2.jpeg', 'mandala3.jpeg', 'mandala4.jpeg', 'mandala5.jpeg'];
+        const audios = ['audio1.mp3', 'audio2.mp3', 'audio3.mp3', 'audio4.mp3', 'audio5.mp3'];
 
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+        const audio = document.getElementById('audio');
 
+        const galleryImages = document.querySelectorAll('.gallery-image');
+        galleryImages.forEach((image, index) => {
+            image.addEventListener('click', () => {
+                loadMandala(images[index]);
+            });
+        });
 
-      if ('userAgentData' in navigator) {
-        const platform = navigator.userAgentData.platform;
-        const brands = navigator.userAgentData.brands;
-        console.log('Platform:', platform);
-        console.log('Brands:', brands);
-      } else {
-        const userAgent = navigator.userAgent;
-        console.log('User Agent:', userAgent);
-      }
+        function loadMandala(imageSrc) {
+            const image = new Image();
+            image.src = imageSrc;
+            image.onload = function() {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.drawImage(image, 0, 0, canvas.width, canvas.height);
+            };
+        }
 
-      const images = ['mandala1.jpeg', 'mandala2.jpeg', 'mandala3.jpeg', 'mandala4.jpeg', 'mandala5.jpeg'];
-const audios = ['audio1.mp3', 'audio2.mp3', 'audio3.mp3', 'audio4.mp3', 'audio5.mp3'];
+        // Inicialmente cargar una imagen de la galería al lienzo
+        loadMandala(images[0]);
 
-const randomIndex = Math.floor(Math.random() * images.length);
-const randomImage = images[randomIndex];
-const randomAudio = audios[randomIndex];
+        const colorPicker = document.getElementById('color-picker');
+        let painting = false;
 
-const canvas = document.getElementById('canvas');
-const context = canvas.getContext('2d');
-const image = new Image();
-image.src = randomImage;
-// Coloca la ruta correcta hacia la imagen
-image.onload = function() {
-  context.drawImage(image, 0, 0, canvas.width, canvas.height);
-};
+        function startPainting() {
+            painting = true;
+            audio.play();
+        }
 
-const audio = document.getElementById('audio');
-audio.src = randomAudio;
+        function stopPainting() {
+            painting = false;
+        }
 
+        function paint(event) {
+            if (!painting) return;
+            context.beginPath();
+            context.fillStyle = colorPicker.value;
+            const radius = document.getElementById('radius').value;
 
-     
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
 
-      const colorPicker = document.getElementById('color-picker');
-      let painting = false;
+            if (event.touches) {
+                context.arc((event.touches[0].clientX - rect.left) * scaleX, (event.touches[0].clientY - rect.top) * scaleY, radius, 0, 2 * Math.PI);
+            } else {
+                context.arc(event.offsetX, event.offsetY, radius, 0, 2 * Math.PI);
+            }
 
+            context.fill();
+        }
 
-
-
-      function startPainting() {
-        painting = true;
-        audio.play();
-      }
-
-      function stopPainting() {
-        painting = false;
-      }
-  
-      function paint(event) {
-  if (!painting) return;
-  context.beginPath();
-  context.fillStyle = colorPicker.value;
-  const radius = document.getElementById('radius').value;
-
-
-  // Obtener las coordenadas del canvas
-  const rect = canvas.getBoundingClientRect();
-  const scaleX = canvas.width / rect.width;
-  const scaleY = canvas.height / rect.height;
-
-  if (event.touches) {
-    // Ajustar la posición del puntero con las coordenadas del canvas
-    context.arc((event.touches[0].clientX - rect.left) * scaleX, (event.touches[0].clientY - rect.top) * scaleY, radius, 0, 2 * Math.PI);
-  } else {
-    context.arc(event.offsetX, event.offsetY, radius, 0, 2 * Math.PI);
-  }
-
-  context.fill();
-}
-
-
-
-      canvas.addEventListener('mousedown', startPainting);
-      canvas.addEventListener('mouseup', stopPainting);
-      canvas.addEventListener('mousemove', paint);
-      canvas.addEventListener('touchstart', startPainting, {passive: false});
-      canvas.addEventListener('touchend', stopPainting, {passive: false});
-      canvas.addEventListener('touchmove', paint, {passive: false});
-      canvas.addEventListener('touchmove', function(event) {
-  event.preventDefault();
-  const rect = canvas.getBoundingClientRect();
-  const x = event.touches[0].clientX - rect.left;
-  const y = event.touches[0].clientY - rect.top;
-  paint(x, y);
-}, {passive: false});
-
-
-
-
-
+        canvas.addEventListener('mousedown', startPainting);
+        canvas.addEventListener('mouseup', stopPainting);
+        canvas.addEventListener('mousemove', paint);
+        canvas.addEventListener('touchstart', startPainting, { passive: false });
+        canvas.addEventListener('touchend', stopPainting, { passive: false });
+        canvas.addEventListener('touchmove', paint, { passive: false });
+    </script>
+</body>
+</html>
 
 
 
